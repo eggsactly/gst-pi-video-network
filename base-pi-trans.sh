@@ -1,6 +1,13 @@
 #!/bin/bash
 
-source params.sh 
+ROUTER_IP=192.168.0.1 
+
+MULTI_CAST_IP=224.1.1.1
+
+BASE_VIDEO_PORT=5000
+BASE_AUDIO_PORT=5001
+REMOTE_VIDEO_PORT=5002
+REMOTE_AUDIO_PORT=5003
 
 # Wait for network to come up before attempting to receive video/audio
 while ! ping -c 1 -W 1 $ROUTER_IP; do
