@@ -15,7 +15,7 @@ while ! ping -c 1 -W 1 $ROUTER_IP; do
 done
 
 # Once the network is up, then start the script
-gst-launch-1.0 -v \
+gst-launch-1.0 \
 	v4l2src device=/dev/video0 ! queue ! video/x-h264, width=640, height=480, framerate=30/1 ! h264parse ! rtph264pay pt=96 ! udpsink host=$MULTI_CAST_IP port=$BASE_VIDEO_PORT auto-multicast=true \
 	alsasrc device=hw:1 ! audio/x-raw, rate=32000, channels=2, format=S16LE ! audioconvert ! queue ! interleave ! audioresample ! audio/x-raw, rate=8000 ! mulawenc ! rtppcmupay ! application/x-rtp, payload=96 ! udpsink host=$MULTI_CAST_IP port=$BASE_AUDIO_PORT auto-multicast=true 
 
